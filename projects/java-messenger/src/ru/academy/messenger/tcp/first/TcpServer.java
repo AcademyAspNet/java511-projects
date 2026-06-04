@@ -1,4 +1,4 @@
-package ru.academy.messenger.tcp;
+package ru.academy.messenger.tcp.first;
 
 import java.io.BufferedReader;
 import java.io.IOException;

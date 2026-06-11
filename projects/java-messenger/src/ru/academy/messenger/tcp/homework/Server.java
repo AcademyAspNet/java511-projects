@@ -15,7 +15,7 @@ public class Server {
             "Quote 2",
             "Quote 3"
     };
-
+    
     static void main() throws IOException {
         int nextQuoteIndex = 0;
 

@@ -1,6 +1,5 @@
 package ru.academy.simple.http.server;
 
-import ru.academy.simple.http.server.v1.Header;
 import ru.academy.simple.http.server.v1.SimpleHttpServer;
 
 import java.io.IOException;

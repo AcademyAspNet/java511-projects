@@ -1,9 +1,10 @@
 package ru.academy.simple.http.server.v1;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Date;
 
 public class SimpleHttpServer {
 
@@ -36,26 +37,11 @@ public class SimpleHttpServer {
     }
 
     private void handleClientSocket(Socket clientSocket) throws IOException {
-        // TODO: Используйте код ниже как основу для работы с данными HTTP-запроса:
-//        BufferedReader reader = new BufferedReader(
-//                new InputStreamReader(clientSocket.getInputStream())
-//        );
-//
-//        String line;
-//
-//        while ((line = reader.readLine()) != null && !line.isEmpty()) {
-//            System.out.println(line);
-//        }
-
         InputStream inputStream = clientSocket.getInputStream();
-        HttpRequest httpRequest = readHttpRequest(inputStream);
+        HttpRequestReader reader = new HttpRequestReader(inputStream);
 
-        String htmlContent =
-                "<html>" +
-                    "<body>" +
-                        "<h1>Привет, мир! Текущая дата: " + new Date() + "</h1>" +
-                    "</body>" +
-                "</html>";
+        HttpRequest httpRequest = reader.readHttpRequest();
+        String htmlContent = getHtmlContent(httpRequest);
 
         PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true);
 
@@ -68,8 +54,29 @@ public class SimpleHttpServer {
         writer.flush();
     }
 
-    private HttpRequest readHttpRequest(InputStream clientInputStream) {
-        // TODO: Реализуйте логику класса HttpRequest и этого метода (readHttpRequest).
-        return null;
+    private String getHtmlContent(HttpRequest httpRequest) {
+        String path = httpRequest.path();
+
+        if (path.equalsIgnoreCase("/cat")) {
+            return "<html>" +
+                        "<body>" +
+                            "<h1>Здесь должно быть изображение котика.</h1>" +
+                        "</body>" +
+                    "</html>";
+        }
+
+        if (path.equalsIgnoreCase("/dog")) {
+            return "<html>" +
+                        "<body>" +
+                            "<h1>Здесь должно быть изображение собачки.</h1>" +
+                        "</body>" +
+                    "</html>";
+        }
+
+        return "<html>" +
+                    "<body>" +
+                        "<h1>К сожалению, такой страницы нет!</h1>" +
+                    "</body>" +
+                "</html>";
     }
 }

@@ -8,10 +8,10 @@ import java.net.Socket;
 
 public class SimpleHttpServer {
 
+    public static final int DEFAULT_HTTP_PORT = 80;
+
     private static final int MIN_PORT = 1;
     private static final int MAX_PORT = 65535;
-
-    private static final int DEFAULT_HTTP_PORT = 80;
 
     private final int port;
 
@@ -36,7 +36,7 @@ public class SimpleHttpServer {
         }
     }
 
-    private void handleClientSocket(Socket clientSocket) throws IOException {
+    protected void handleClientSocket(Socket clientSocket) throws IOException {
         InputStream inputStream = clientSocket.getInputStream();
         HttpRequestReader reader = new HttpRequestReader(inputStream);
 
@@ -69,6 +69,7 @@ public class SimpleHttpServer {
             return "<html>" +
                         "<body>" +
                             "<h1>Здесь должно быть изображение собачки.</h1>" +
+                            "<p><i>Привет</i>, мир! <u>Привет всем</u>!</p>" +
                         "</body>" +
                     "</html>";
         }

@@ -1,13 +1,10 @@
 package ru.academy.simple.http.server.v1;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HttpRequestReader {
+public class HttpRequestReader implements Closeable {
 
     private static final String WHITESPACE = " ";
 
@@ -42,5 +39,9 @@ public class HttpRequestReader {
                 protocolVersion,
                 headerList
         );
+    }
+
+    public void close() throws IOException {
+        bufferedReader.close();
     }
 }

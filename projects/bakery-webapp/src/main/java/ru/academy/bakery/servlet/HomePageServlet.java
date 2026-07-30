@@ -11,10 +11,11 @@ import ru.academy.bakery.service.ProductService;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-@WebServlet("/")
+@WebServlet("")
 public class HomePageServlet extends HttpServlet {
 
     @Override
@@ -22,7 +23,7 @@ public class HomePageServlet extends HttpServlet {
             throws ServletException, IOException {
 
         ProductService productService = new ProductService();
-        Product[] products = productService.getRandomProducts(10);
+        Product[] products = productService.getProducts();
 
         request.setAttribute("products", products);
 

@@ -11,6 +11,11 @@
     </head>
     <body>
         <jsp:include page="../components/navbar.jsp" />
+        <% if (request.getParameter("feedbackSent") != null) { %>
+            <div class="container-fluid">
+                <p class="mt-3 fw-bold">Спасибо за обратную связь!</p>
+            </div>
+        <% } %>
         <jsp:include page="../components/header.jsp" />
         <jsp:include page="../components/menu.jsp" />
         <jsp:include page="../components/about.jsp" />
